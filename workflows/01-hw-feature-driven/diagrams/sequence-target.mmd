@@ -1,0 +1,22 @@
+%% PROPOSED: Cross-Team ECO Handoff Sequence
+sequenceDiagram
+    participant HWE as HW Engineer
+    participant PE as Project Engineer
+    participant SW as SW Lead
+    participant AUTO as Autonomy Lead
+    participant AERO as Aero Lead
+    participant QE as Quality Engineer
+
+    HWE->>PE: Submit ECR for feature-driven change
+    PE->>SW: Request software impact assessment
+    PE->>AUTO: Request autonomy impact assessment
+    PE->>AERO: Request aero impact assessment
+    SW-->>PE: Return SW assessment
+    AUTO-->>PE: Return autonomy assessment
+    AERO-->>PE: Return aero assessment
+    PE->>PE: Classify change and decide disposition
+    PE-->>HWE: Approve, reject, or request rework
+    HWE->>HWE: Implement approved hardware change
+    HWE->>QE: Submit updated hardware for FAI
+    QE-->>PE: Verification result and release recommendation
+    PE-->>HWE: Release effectivity decision

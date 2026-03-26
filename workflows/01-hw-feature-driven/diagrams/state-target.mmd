@@ -1,0 +1,25 @@
+%% PROPOSED: ECO Document Lifecycle
+%% Intended palette from STYLE-GUIDE.md: gate red, milestone green, feedback amber, process blue, artifact yellow, external gray.
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Submitted: ECR submitted
+    Submitted --> UnderReview: Review started
+    UnderReview --> Approved: Approved
+    UnderReview --> Rejected: Rejected
+    Rejected --> Draft: Rework
+    Approved --> InImplementation: ECO released
+    InImplementation --> Verified: FAI complete
+    Verified --> Released: Effectivity issued
+    Released --> [*]
+
+    note right of Draft
+        Initial authoring state
+    end note
+
+    note right of UnderReview
+        Cross-functional assessment
+    end note
+
+    note right of Verified
+        Quality evidence accepted
+    end note
