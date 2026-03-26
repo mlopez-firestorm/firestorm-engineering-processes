@@ -1,0 +1,55 @@
+%% Firestorm Engineering Process Landscape
+flowchart LR
+
+classDef gate fill:#e74c3c,stroke:#c0392b,color:#fff
+classDef milestone fill:#2ecc71,stroke:#27ae60,color:#fff
+classDef feedback fill:#f39c12,stroke:#e67e22,color:#fff
+classDef process fill:#e3f2fd,stroke:#90caf9,color:#1a237e
+classDef artifact fill:#fff3bf,stroke:#ffcc02,color:#333
+classDef external fill:#e0e0e0,stroke:#9e9e9e,color:#333
+
+subgraph dev["Design & Development"]
+  wf01[01 HW Feature-Driven ECO]
+  wf03[03 SW Release]
+  wf07[07 Autonomy Behavior Dev]
+end
+
+subgraph verify["Verification & Production"]
+  wf05[05 Integration & Verification]
+  wf04[04 Flight Test]
+end
+
+subgraph lifecycle["Lifecycle Management"]
+  wf02[02 HW Field-Issue FRACAS]
+  wf06[06 New Product Dev]
+  wf08[08 Supplier / Vendor]
+end
+
+reqs(New product requirements)
+swreqs(SW requirements)
+baseline(Product baseline)
+testaircraft(Integrated aircraft)
+behaviordata(Behavior test data)
+
+wf06 -->|"New product requirements"| wf01
+wf06 -->|"SW requirements"| wf03
+wf06 -->|"Product baseline"| wf05
+wf01 -->|"Released HW design"| wf05
+wf03 -->|"Released SW builds"| wf05
+wf07 -->|"Certified behaviors"| wf03
+wf08 -->|"Qualified components"| wf05
+wf05 -->|"Integrated aircraft for test"| wf04
+wf04 -->|"Field failures"| wf02
+wf02 -->|"Corrective action ECR"| wf01
+wf04 -->|"Behavior test data"| wf07
+
+wf06 -.-> reqs
+wf06 -.-> swreqs
+wf06 -.-> baseline
+wf05 -.-> testaircraft
+wf04 -.-> behaviordata
+
+class wf01,wf03,wf05,wf06,wf07 process
+class wf02,wf04 feedback
+class wf08 external
+class reqs,swreqs,baseline,testaircraft,behaviordata artifact
