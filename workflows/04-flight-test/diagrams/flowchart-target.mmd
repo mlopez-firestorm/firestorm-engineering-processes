@@ -1,0 +1,44 @@
+%% PROPOSED: Flight Test Process
+flowchart TD
+classDef gate fill:#e74c3c,stroke:#c0392b,color:#fff
+classDef milestone fill:#2ecc71,stroke:#27ae60,color:#fff
+classDef feedback fill:#f39c12,stroke:#e67e22,color:#fff
+classDef process fill:#e3f2fd,stroke:#90caf9,color:#1a237e
+classDef artifact fill:#fff3bf,stroke:#ffcc02,color:#333
+classDef external fill:#e0e0e0,stroke:#9e9e9e,color:#333
+
+start([Flight test need]) --> objectives[Define objectives]
+objectives --> cards(Write test cards and criteria)
+cards --> config[Define HW, SW, autonomy config]
+config --> safety[Document safety mitigations]
+safetyfix:::feedback
+safetyfix --> objectives
+safety --> ftrr{FTRR ready?}
+ftrr -->|No| safetyfix[Rework test package]
+ftrr -->|Yes| prep[Prepare aircraft]
+prep --> verify[Verify serial and build]
+verify --> brief[Conduct pre-flight brief]
+brief --> execute[Execute test cards]
+execute --> monitor[Monitor in Ignite GCS]
+monitor --> abort{Abort criteria met?}
+abort -->|Yes| recover[Recover aircraft safely]
+abort -->|No| recover
+recover --> download[Download logs and data]
+download --> quick[Quick-look analysis and inspection]
+quick --> issue{Issue or anomaly found?}
+issue -->|Yes| fracas([WF02 FRACAS])
+issue -->|No| analysis[Detailed cross-team analysis]
+fracas --> analysis
+analysis --> report(Flight test report)
+report -.-> autonomy([WF07 Autonomy dev])
+report -.-> aero([Aero analysis tools])
+report --> pass{Pass criteria met?}
+pass -->|No| objectives
+pass -->|Yes| close((Flight test closed))
+
+class start,fracas,autonomy,aero external
+class objectives,config,safety,prep,verify,brief,execute,monitor,recover,download,quick,analysis process
+class ftrr,abort,issue,pass gate
+class safetyfix feedback
+class cards,report artifact
+class close milestone

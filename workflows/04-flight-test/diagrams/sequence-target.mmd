@@ -1,0 +1,49 @@
+%% PROPOSED: Flight Test Cross-Team Sequence
+sequenceDiagram
+    participant TL as Test Lead
+    participant SW as SW Team
+    participant AUTO as Autonomy
+    participant HW as HW Team
+    participant AERO as Aero
+    participant Q as Quality
+    participant FO as Field Ops
+    participant PE as Project Engineer
+    participant FR as WF02 FRACAS
+
+    TL->>SW: Request software test inputs and monitoring needs
+    TL->>AUTO: Request behavior objectives and success criteria
+    TL->>HW: Request aircraft configuration and constraints
+    TL->>AERO: Request performance objectives and data needs
+    SW-->>TL: SW version and GCS support plan
+    AUTO-->>TL: Behavior plan and abort triggers
+    HW-->>TL: Aircraft config and readiness inputs
+    AERO-->>TL: Performance metrics and analysis plan
+    TL->>Q: Submit procedures and safety mitigations
+    Q-->>TL: Quality review comments
+    TL->>PE: Present FTRR package for readiness review
+    PE->>SW: Confirm team readiness
+    PE->>AUTO: Confirm team readiness
+    PE->>HW: Confirm team readiness
+    PE->>AERO: Confirm team readiness
+    PE->>Q: Confirm safety and procedure readiness
+    alt FTRR approved
+        PE->>FO: Authorize test execution
+        FO->>FO: Prepare aircraft and verify configuration
+        FO->>TL: Aircraft ready for flight
+        TL->>SW: Start real-time monitoring
+        TL->>AUTO: Execute planned behaviors
+        TL->>HW: Execute flight event
+        par Post-flight analysis
+            SW-->>TL: Logs and quick-look results
+            AUTO-->>TL: Behavior analysis
+            HW-->>TL: Aircraft and system inspection results
+            AERO-->>TL: Performance analysis
+        end
+        TL->>PE: Submit flight test report
+        PE-->>TL: Accept report and assign follow-up actions
+        opt Issue discovered
+            PE->>FR: Open corrective action in WF02
+        end
+    else FTRR rejected
+        PE-->>TL: Rework package and reschedule review
+    end
