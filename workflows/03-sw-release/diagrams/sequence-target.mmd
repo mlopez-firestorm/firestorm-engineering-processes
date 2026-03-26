@@ -1,0 +1,24 @@
+%% PROPOSED: Software Release Approval Sequence
+sequenceDiagram
+    participant SWE as SW Engineer
+    participant SWL as SW Lead
+    participant CI as CI
+    participant PE as Project Engineer
+    participant Q as Quality
+    participant FO as Field Ops
+
+    SWE->>SWL: Submit PR for release-scoped change
+    SWL->>SWL: Review code and release impact
+    SWL->>CI: Approve merge candidate for CI
+    CI->>CI: Build and run unit or integration tests
+    CI-->>SWL: Report automated test evidence
+    SWL->>SWL: Approve release candidate
+    SWL->>PE: Request production gate approval
+    PE->>Q: Request release verification review
+    Q->>Q: Check SITL, HITL, and flight evidence
+    Q-->>PE: Verification complete
+    PE-->>SWL: Approve production release
+    SWL->>FO: Hand off released package and instructions
+    FO->>FO: Deploy approved version to fleet assets
+
+    Note over SWE,FO: Release applies across Firmware, Ignite, and Companion Computer streams

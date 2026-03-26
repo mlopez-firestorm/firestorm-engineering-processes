@@ -1,0 +1,61 @@
+%% PROPOSED: Software Release Pipeline
+flowchart TB
+    req([Approved Release Scope]) --> fwDev
+    req --> ignDev
+    req --> ccDev
+
+    subgraph fw[Firmware Stream]
+        direction TB
+        fwDev[Develop Firmware]
+        fwReview{Code Review}
+        fwBuild[Build Firmware]
+        fwUnit[Unit Test]
+        fwInt[Integration Test]
+        fwRC((Firmware RC))
+        fwDev --> fwReview --> fwBuild --> fwUnit --> fwInt --> fwRC
+    end
+
+    subgraph ign[Ignite GCS Stream]
+        direction TB
+        ignDev[Develop Ignite]
+        ignReview{Code Review}
+        ignBuild[Build Ignite]
+        ignUnit[Unit Test]
+        ignInt[Integration Test]
+        ignRC((Ignite RC))
+        ignDev --> ignReview --> ignBuild --> ignUnit --> ignInt --> ignRC
+    end
+
+    subgraph cc[Companion Computer Stream]
+        direction TB
+        ccDev[Develop Companion SW]
+        ccReview{Code Review}
+        ccBuild[Build Companion]
+        ccUnit[Unit Test]
+        ccInt[Integration Test]
+        ccRC((Companion RC))
+        ccDev --> ccReview --> ccBuild --> ccUnit --> ccInt --> ccRC
+    end
+
+    fwRC --> sys[SITL / HITL System Test]
+    ignRC --> sys
+    ccRC --> sys
+    sys --> gate{Release Gate Passed?}
+    gate -- Yes --> flight[Flight Test Validation]
+    gate -- No --> correct[Correct Defects]
+    correct --> req
+    flight --> prod[Release to Production]
+    prod --> deploy[Deploy to Fleet]
+
+    classDef gate fill:#e74c3c,stroke:#c0392b,color:#fff
+    classDef milestone fill:#2ecc71,stroke:#27ae60,color:#fff
+    classDef feedback fill:#f39c12,stroke:#e67e22,color:#fff
+    classDef process fill:#e3f2fd,stroke:#90caf9,color:#1a237e
+    classDef artifact fill:#fff3bf,stroke:#ffcc02,color:#333
+    classDef external fill:#e0e0e0,stroke:#9e9e9e,color:#333
+
+    class req external
+    class fwDev,fwBuild,fwUnit,fwInt,ignDev,ignBuild,ignUnit,ignInt,ccDev,ccBuild,ccUnit,ccInt,sys,flight,prod,deploy process
+    class fwReview,ignReview,ccReview,gate gate
+    class fwRC,ignRC,ccRC milestone
+    class correct feedback
