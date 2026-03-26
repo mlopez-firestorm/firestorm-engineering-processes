@@ -1,0 +1,13 @@
+{
+  "name": "firestorm-engineering-processes",
+  "version": "1.0.0",
+  "description": "Engineering workflow documentation for Firestorm",
+  "private": true,
+  "scripts": {
+    "validate": "make validate",
+    "build:pngs": "make pngs"
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11"
+  }
+}

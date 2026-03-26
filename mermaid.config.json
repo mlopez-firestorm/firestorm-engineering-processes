@@ -1,0 +1,11 @@
+{
+  "theme": "neutral",
+  "flowchart": {
+    "curve": "basis",
+    "useMaxWidth": true
+  },
+  "sequence": {
+    "useMaxWidth": true,
+    "wrap": true
+  }
+}
