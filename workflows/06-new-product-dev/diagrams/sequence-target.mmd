@@ -1,0 +1,44 @@
+%% PROPOSED: Design Review Gate Decision Sequence
+%% classDef gate fill:#e74c3c,stroke:#c0392b,color:#fff
+%% classDef milestone fill:#2ecc71,stroke:#27ae60,color:#fff
+%% classDef feedback fill:#f39c12,stroke:#e67e22,color:#fff
+%% classDef process fill:#e3f2fd,stroke:#90caf9,color:#1a237e
+%% classDef artifact fill:#fff3bf,stroke:#ffcc02,color:#333
+%% classDef external fill:#e0e0e0,stroke:#9e9e9e,color:#333
+sequenceDiagram
+    participant PE as Project Engineer
+    participant HW as HW Team
+    participant SW as SW Team
+    participant AUTO as Autonomy
+    participant AERO as Aero
+    participant RB as Review Board
+
+    PE->>RB: Convene design review gate
+    PE->>HW: Request gate presentation
+    HW-->>RB: Present hardware status, risks, and closure evidence
+    PE->>SW: Request gate presentation
+    SW-->>RB: Present software status, risks, and closure evidence
+    PE->>AUTO: Request gate presentation
+    AUTO-->>RB: Present autonomy status, risks, and closure evidence
+    PE->>AERO: Request gate presentation
+    AERO-->>RB: Present aero status, risks, and closure evidence
+    RB->>RB: Evaluate entry criteria, actions, and exit evidence
+    alt Approve
+        RB-->>PE: Approve gate and authorize next phase
+        PE-->>HW: Release approval and next-phase entry
+        PE-->>SW: Release approval and next-phase entry
+        PE-->>AUTO: Release approval and next-phase entry
+        PE-->>AERO: Release approval and next-phase entry
+    else Rework
+        RB-->>PE: Rework required before gate closure
+        PE-->>HW: Capture actions and required updates
+        PE-->>SW: Capture actions and required updates
+        PE-->>AUTO: Capture actions and required updates
+        PE-->>AERO: Capture actions and required updates
+    else Cancel
+        RB-->>PE: Cancel or defer effort
+        PE-->>HW: Stop next-phase work
+        PE-->>SW: Stop next-phase work
+        PE-->>AUTO: Stop next-phase work
+        PE-->>AERO: Stop next-phase work
+    end
