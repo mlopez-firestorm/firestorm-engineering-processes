@@ -1,0 +1,22 @@
+%% PROPOSED: Cross-Team Autonomy Behavior Handoff Sequence
+sequenceDiagram
+    participant AUTO as Autonomy Lead
+    participant AERO as Aero Lead
+    participant SW as SW Lead
+    participant HW as HW Lead
+    participant FO as Field Operator
+    participant PE as Project Engineer
+
+    AUTO->>AERO: Share behavior requirements and mission envelope
+    AERO-->>AUTO: Return aero constraints and performance targets
+    AUTO->>SW: Request software interfaces and safety hooks
+    AUTO->>HW: Request compute, sensor, and integration support
+    SW-->>AUTO: Confirm SITL and HITL software readiness
+    HW-->>AUTO: Confirm hardware availability and interface readiness
+    AUTO->>FO: Deliver validation objectives and test package
+    FO->>PE: Request test window, aircraft, and field approval
+    PE-->>FO: Authorize test entry criteria and priorities
+    FO-->>AUTO: Return HITL and flight observations with logs
+    AUTO->>AERO: Review measured performance versus assumptions
+    AUTO->>PE: Submit certification and release recommendation
+    PE-->>AUTO: Approve release or require rework

@@ -1,0 +1,22 @@
+%% PROPOSED: Behavior Maturity Lifecycle
+stateDiagram-v2
+    [*] --> Concept
+    Concept --> InDesign: Requirements aligned
+    InDesign --> SimValidated: SITL passed
+    SimValidated --> HITLValidated: HITL passed
+    HITLValidated --> FlightTested: Flight test passed
+    FlightTested --> Certified: Certification approved
+    Certified --> Released: Deployment approved
+    SimValidated --> InDesign: SITL regression
+    HITLValidated --> InDesign: HITL issue found
+    FlightTested --> InDesign: Flight rework needed
+    Released --> SimValidated: Regression found
+    Released --> [*]
+
+    note right of SimValidated
+        Simulation evidence complete
+    end note
+
+    note right of Released
+        Controlled operational deployment
+    end note
