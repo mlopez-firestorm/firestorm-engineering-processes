@@ -1,0 +1,7 @@
+%% Current State: Field Issue Ticket Lifecycle
+stateDiagram-v2
+    [*] --> Open
+    Open --> In_Progress
+    In_Progress --> Resolved
+    Resolved --> Closed
+    Closed --> [*]

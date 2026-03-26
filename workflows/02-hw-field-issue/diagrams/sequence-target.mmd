@@ -1,0 +1,38 @@
+%% PROPOSED: Field Issue Cross-Team Resolution Sequence
+sequenceDiagram
+    participant FO as Field Operator
+    participant Q as Quality
+    participant HL as HW Lead
+    participant HE as HW Engineer
+    participant SWE as SW Engineer
+    participant AE as Autonomy Engineer
+    participant PE as Project Engineer
+    participant ECO as Workflow 01 ECO Process
+
+    FO->>Q: Report failure with serial and symptoms
+    Q->>HL: Open FRACAS record and request triage
+    HL->>Q: Confirm severity and containment needs
+
+    par Hardware investigation
+        HL->>HE: Analyze hardware evidence
+        HE-->>HL: Return root cause findings
+    and Software investigation
+        HL->>SWE: Check software contribution
+        SWE-->>HL: Return software findings
+    and Autonomy investigation
+        HL->>AE: Check autonomy contribution
+        AE-->>HL: Return autonomy findings
+    end
+
+    HL->>PE: Recommend corrective action
+    alt Design change required
+        PE->>HE: Approve ECR creation
+        HE->>ECO: Start Workflow 01 ECO
+        ECO-->>PE: Return approved implementation package
+    else Procedure or risk action
+        PE-->>HL: Approve non-ECO action
+    end
+
+    PE->>Q: Request verification and effectiveness review
+    Q-->>FO: Confirm field result
+    Q-->>HL: Close FRACAS record

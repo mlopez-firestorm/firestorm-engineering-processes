@@ -1,0 +1,23 @@
+%% PROPOSED: FRACAS Record Lifecycle
+stateDiagram-v2
+    [*] --> Reported
+    Reported --> Classified
+    Classified --> Contained
+    Contained --> Under_Investigation
+    Under_Investigation --> CA_Defined
+    CA_Defined --> Action_Type
+
+    state Action_Type <<choice>>
+
+    Action_Type --> ECO_Path: Design change
+    Action_Type --> Procedure_Path: Procedure update
+    Action_Type --> Risk_Accepted: Accept risk
+    ECO_Path --> Implementing
+    Procedure_Path --> Implementing
+    Risk_Accepted --> Verified
+    Implementing --> Verified
+    Verified --> Effectiveness_Review: Pass
+    Verified --> Under_Investigation: Rework needed
+    Effectiveness_Review --> Closed: Effective
+    Effectiveness_Review --> Under_Investigation: Recurrence
+    Closed --> [*]
