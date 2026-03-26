@@ -1,0 +1,41 @@
+%% PROPOSED: Supplier / Vendor Management Lifecycle
+flowchart TD
+classDef gate fill:#e74c3c,stroke:#c0392b,color:#fff
+classDef milestone fill:#2ecc71,stroke:#27ae60,color:#fff
+classDef feedback fill:#f39c12,stroke:#e67e22,color:#fff
+classDef process fill:#e3f2fd,stroke:#90caf9,color:#1a237e
+classDef artifact fill:#fff3bf,stroke:#ffcc02,color:#333
+classDef external fill:#e0e0e0,stroke:#9e9e9e,color:#333
+
+start([Need identified]) --> req[Define requirements]
+req --> eval[Evaluate suppliers]
+eval --> shortlist(Shortlisted supplier)
+shortlist --> capability[Review capability and quality evidence]
+capability --> qualify[Qualification testing]
+qualify --> fai[First article inspection]
+fai --> qualified{Qualification successful?}
+qualified -->|No| corrective[Supplier corrective action / rework]
+corrective --> qualify
+qualified -->|Yes| asl((ASL approval))
+asl --> po[Procurement release]
+po --> order(Purchase order with flowdowns)
+order --> receive[Receive material]
+receive --> inspect[Incoming inspection]
+inspect --> accepted{Accept material?}
+accepted -->|Accept| stock((Accepted to stock / use))
+accepted -->|Reject| reject[Reject shipment]
+accepted -->|MRB| mrb[MRB disposition]
+stock --> change[Supplier change notification]
+change --> impact[Assess change impact]
+impact --> reevaluate{Requalify required?}
+reevaluate -->|Yes| qualify
+reevaluate -->|No| asl
+reject --> corrective
+mrb --> corrective
+
+class start external
+class req,eval,capability,qualify,fai,po,receive,inspect,impact process
+class qualified,accepted,reevaluate gate
+class corrective,change feedback
+class shortlist,order artifact
+class asl,stock,reject,mrb milestone
