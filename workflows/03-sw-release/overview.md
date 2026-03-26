@@ -124,13 +124,13 @@ This traceability allows the team to answer which software is installed on each 
 
 ## RACI Matrix
 
-| Activity | SW Team | Autonomy | HW Team | Project Engineer | Quality | Field Ops |
-|----------|---------|----------|---------|-----------------|---------|-----------|
-| Develop feature/fix | R | C (if behavior) | C (if interface) | I | — | — |
-| Code review | R | C (if behavior) | — | — | — | — |
-| Build & unit test | R | — | — | — | — | — |
-| Integration test (SITL/HITL) | R | R (if behavior) | C | I | — | — |
-| Release candidate approval | A | C | C | A (production gate) | R | — |
-| Flight test validation | R | R | C | A | R | C |
-| Release to production | R | — | — | A | R | — |
-| Deploy to fleet | C | — | — | I | R | R |
+| Activity | SW Team | Autonomy | HW Team | Aero | Project Engineer | SVP Engineering | Quality | Field Ops |
+|----------|---------|----------|---------|------|-----------------|----------------|---------|-----------|
+| Develop feature/fix | R | C (if behavior) | C (if interface) | — | I | — | — | — |
+| Code review | R | C (if behavior) | — | — | — | — | — | — |
+| Build & unit test | R | — | — | — | — | — | — | — |
+| Integration test (SITL/HITL) | R | R (if behavior) | C | — | I | — | — | — |
+| Release candidate approval | A | C | C | — | A (production gate) | I | R | — |
+| Flight test validation | R | R | C | C | A | I | R | C |
+| Release to production | R | — | — | — | A | I | R | — |
+| Deploy to fleet | C | — | — | — | I | — | R | R |

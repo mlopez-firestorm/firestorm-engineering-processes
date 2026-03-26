@@ -56,14 +56,14 @@ Flight test outcomes feed directly into downstream workflows. Hardware or system
 
 ## RACI Matrix
 
-| Activity | SW Team | Autonomy | HW Team | Aero | Project Engineer | Quality | Field Ops |
-|----------|---------|----------|---------|------|-----------------|---------|-----------|
-| Define test objectives | C | R | R | R | A | C | C |
-| Write test procedures | C | R | C | R | I | R | C |
-| FTRR readiness review | R | R | R | R | A | R | C |
-| Aircraft preparation | C | C | R | — | I | R | R |
-| Execute flight test | R (GCS) | R (behaviors) | R (aircraft) | C | A | R | R |
-| Data download & quick-look | R | R | R | R | I | — | R |
-| Detailed data analysis | C | R (behavior) | R (systems) | R (aero) | I | — | — |
-| Flight test report | C | R | R | R | A | R | C |
-| Issue feedback (→FRACAS/WF02) | C | C | R | C | A | R | R |
+| Activity | SW Team | Autonomy | HW Team | Aero | Project Engineer | SVP Engineering | Quality | Field Ops |
+|----------|---------|----------|---------|------|-----------------|----------------|---------|-----------|
+| Define test objectives | C | R | R | R | A | I | C | C |
+| Write test procedures | C | R | C | R | I | — | R | C |
+| FTRR readiness review | R | R | R | R | A | I | R | C |
+| Aircraft preparation | C | C | R | — | I | — | R | R |
+| Execute flight test | R (GCS) | R (behaviors) | R (aircraft) | C | A | I | R | R |
+| Data download & quick-look | R | R | R | R | I | — | — | R |
+| Detailed data analysis | C | R (behavior) | R (systems) | R (aero) | I | — | — | — |
+| Flight test report | C | R | R | R | A | I | R | C |
+| Issue feedback (→FRACAS/WF02) | C | C | R | C | A | I | R | R |

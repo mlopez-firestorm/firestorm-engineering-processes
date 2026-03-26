@@ -51,13 +51,13 @@ Approved suppliers are expected to notify Firestorm before changes that could af
 
 ## RACI Matrix
 
-| Activity | HW Team | SW Team | Project Engineer | SVP Engineering | Quality | Procurement |
-|----------|---------|---------|-----------------|----------------|---------|-------------|
-| Identify component need | R | C | I | — | — | — |
-| Define requirements | R | C | I | — | C | — |
-| Evaluate suppliers | R | — | C | I | R | R |
-| Qualify component (test) | R | C | I | — | R | — |
-| Approve supplier (ASL) | C | — | A | I | R | C |
-| Procurement | C | — | A | — | C | R |
-| Incoming inspection | C | — | — | — | R | C |
-| Supplier change notification | R | C | A | I | R | C |
+| Activity | HW Team | SW Team | Autonomy | Aero | Project Engineer | SVP Engineering | Quality | Procurement |
+|----------|---------|---------|----------|------|-----------------|----------------|---------|-------------|
+| Identify component need | R | C | — | — | I | — | — | — |
+| Define requirements | R | C | C | C | I | — | C | — |
+| Evaluate suppliers | R | — | — | — | C | I | R | R |
+| Qualify component (test) | R | C | — | — | I | — | R | — |
+| Approve supplier (ASL) | C | — | — | — | A | I | R | C |
+| Procurement | C | — | — | — | A | — | C | R |
+| Incoming inspection | C | — | — | — | — | — | R | C |
+| Supplier change notification | R | C | C | C | A | I | R | C |
