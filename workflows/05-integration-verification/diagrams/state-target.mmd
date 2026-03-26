@@ -1,0 +1,20 @@
+%% PROPOSED: Aircraft Integration State Lifecycle
+stateDiagram-v2
+    [*] --> Subsystems_In_Development
+    Subsystems_In_Development --> Subsystems_Ready: All teams declare readiness
+    Subsystems_Ready --> Interface_Verified: ICD checks pass
+    Interface_Verified --> HITL_Passed: HITL evidence accepted
+    HITL_Passed --> System_Integrated: Full aircraft assembled
+    System_Integrated --> System_Verified: Requirements verification passes
+    System_Verified --> Config_Audited: As-built matches baseline
+    Config_Audited --> Production_Released: PRR approved
+    Production_Released --> [*]
+
+    state "Subsystems In Development" as Subsystems_In_Development
+    state "Subsystems Ready" as Subsystems_Ready
+    state "Interface Verified" as Interface_Verified
+    state "HITL Passed" as HITL_Passed
+    state "System Integrated" as System_Integrated
+    state "System Verified" as System_Verified
+    state "Config Audited" as Config_Audited
+    state "Production Released" as Production_Released

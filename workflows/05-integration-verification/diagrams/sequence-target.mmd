@@ -1,0 +1,42 @@
+%% PROPOSED: Integration & Verification Cross-Team Sequence
+sequenceDiagram
+    participant HW as HW Team
+    participant SW as SW Team
+    participant AUT as Autonomy
+    participant AERO as Aero
+    participant Q as Quality
+    participant PE as Project Engineer
+    participant SVP as SVP Engineering
+
+    HW->>PE: Declare HW subsystem ready
+    SW->>PE: Declare SW subsystem ready
+    AUT->>PE: Declare autonomy subsystem ready
+    AERO->>PE: Declare aero subsystem ready
+    PE->>Q: Notify readiness package complete
+
+    HW->>SW: Verify HW↔FW ICD
+    SW->>AUT: Verify FW/Companion↔Autonomy interfaces
+    AUT->>AERO: Verify autonomy↔aero assumptions
+    Q->>HW: Witness interface verification evidence
+    Q->>SW: Record interface verification results
+
+    SW->>AUT: Run HITL test campaign
+    AUT->>HW: Exercise behaviors on real hardware
+    Q->>PE: Report HITL status
+
+    HW->>SW: Assemble integrated aircraft
+    SW->>AUT: Run system-level functional tests
+    AUT->>AERO: Compare integrated behavior to expected performance
+    Q->>PE: Record system integration and verification evidence
+
+    HW->>Q: Submit as-built configuration records
+    SW->>Q: Submit released software/autonomy versions
+    AUT->>Q: Confirm behavior baseline used in verification
+    AERO->>Q: Confirm supporting configuration assumptions
+    Q->>PE: Complete configuration audit summary
+
+    PE->>SVP: Present PRR package and recommendation
+    SVP-->>PE: Approve production gate
+    PE->>HW: Release design package to production
+    PE->>SW: Release software package to production
+    Q->>HW: Confirm controlled release records
